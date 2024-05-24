@@ -59,16 +59,34 @@
           <td>
             <form id="symptomsForm">
               <div class="form-group">
-                <select multiple class="form-control" id="symptoms">
-                  <option value="1">ঋতুস্রাব হচ্ছে না</option>
-                  <option value="2">অনিয়মিত ঋতুস্রাব</option>
-                  <option value="3">অতিরিক্ত ঋতুস্রাব</option>
-                  <option value="4">প্রচন্ড বাদক ব্যথা হচ্ছে</option>
-                  <option value="5">লিউকোরিয়া বা সাদাস্রাব হচ্ছে</option>
-                  <option value="6">ঋতুস্রাব বন্ধ হয়ে যাচ্ছে বা গেছে</option>
-                  
-                  <!-- Add more symptoms here -->
-                </select>
+                <label>
+                  <input type="radio" name="symptoms" value="1"> ঋতুস্রাব হচ্ছে না
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="symptoms" value="2"> অনিয়মিত ঋতুস্রাব
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="symptoms" value="3"> অতিরিক্ত ঋতুস্রাব
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="symptoms" value="4"> প্রচন্ড বাদক ব্যথা হচ্ছে
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="symptoms" value="5"> লিউকোরিয়া বা সাদাস্রাব হচ্ছে
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="symptoms" value="6"> ঋতুস্রাব বন্ধ হয়ে যাচ্ছে বা গেছে
+                </label>
               </div>
               <button type="submit" class="btn btn-primary">সাবমিট</button>
             </form>
@@ -103,7 +121,7 @@
   document.getElementById('symptomsForm').addEventListener('submit', function(event) {
     event.preventDefault(); 
     
-    var selectedSymptoms = Array.from(document.getElementById('symptoms').selectedOptions).map(option => option.value);
+    var selectedSymptoms = document.querySelector('input[name="symptoms"]:checked').value;
     
     var resultElement = document.getElementById('result');
     var treatmentElement = document.getElementById('treatment');
@@ -111,10 +129,22 @@
     var resultHtml = "";
     var treatmentHtml = "";
     
-    if (selectedSymptoms.includes('1') || selectedSymptoms.includes('2') || selectedSymptoms.includes('3') || selectedSymptoms.includes('4') ) {
+    if (selectedSymptoms === '1') {
+      resultHtml += '<button type="button" class="btn btn-success">স্বাভাবিক লক্ষণ</button>';
+      treatmentHtml += '<li>শিশুকে পুষ্টিকর তরল খাবার দিতে হবে।</li>';
+    } else if (selectedSymptoms === '2') {
       resultHtml += '<button type="button" class="btn btn-danger">বেশি মারাত্মক লক্ষণ</button>';
       treatmentHtml += '<li>অতি শীঘ্রই উপজেলা স্বাস্থ্যকমপ্লেক্সে রেফার করতে হবে।</li>';
-    } else if (selectedSymptoms.includes('5') || selectedSymptoms.includes('6') || selectedSymptoms.includes('7') ) {
+    } else if (selectedSymptoms === '3') {
+      resultHtml += '<button type="button" class="btn btn-danger">বেশি মারাত্মক লক্ষণ</button>';
+      treatmentHtml += '<li>অতি শীঘ্রই উপজেলা স্বাস্থ্যকমপ্লেক্সে রেফার করতে হবে।</li>';
+    } else if (selectedSymptoms === '4') {
+      resultHtml += '<button type="button" class="btn btn-danger">বেশি মারাত্মক লক্ষণ</button>';
+      treatmentHtml += '<li>অতি শীঘ্রই উপজেলা স্বাস্থ্যকমপ্লেক্সে রেফার করতে হবে।</li>';
+    } else if (selectedSymptoms === '5') {
+      resultHtml += '<button type="button" class="btn btn-warning">কম মারাত্মক লক্ষণ</button>';
+      treatmentHtml += '<li>শিশুকে খাবার স্যালাইন চালিয়ে যেতে হবে।</li>';
+    } else if (selectedSymptoms === '6') {
       resultHtml += '<button type="button" class="btn btn-warning">কম মারাত্মক লক্ষণ</button>';
       treatmentHtml += '<li>শিশুকে খাবার স্যালাইন চালিয়ে যেতে হবে।</li>';
     } else {
